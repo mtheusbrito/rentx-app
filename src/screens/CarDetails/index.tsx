@@ -29,7 +29,10 @@ import {
   Price,
   About,
   Accessories,
+  Footer
 } from './styles';
+import { Button } from '../../components/Button';
+import { useTheme } from 'styled-components';
 
 export function CarDetails() {
   return (
@@ -57,12 +60,12 @@ export function CarDetails() {
           </Rent>
         </Details>
         <Accessories>
-          <Accessory name="380km/h" icon={speedSvg}/>
-          <Accessory name='3.2s' icon={accelerationSvg}/>
-          <Accessory name='800 HP' icon={forceSvg}/>
-          <Accessory  name='Gasoline' icon={gasolineSvg}/>
-          <Accessory name='Auto' icon={exchangeSvg}/>
-          <Accessory name='2 peoples' icon={peopleSvg}/>
+          <Accessory name="380km/h" icon={speedSvg} />
+          <Accessory name="3.2s" icon={accelerationSvg} />
+          <Accessory name="800 HP" icon={forceSvg} />
+          <Accessory name="Gasoline" icon={gasolineSvg} />
+          <Accessory name="Auto" icon={exchangeSvg} />
+          <Accessory name="2 peoples" icon={peopleSvg} />
         </Accessories>
 
         <About>
@@ -71,6 +74,10 @@ export function CarDetails() {
           para quem fosta de acelerar.
         </About>
       </Content>
+
+      <Footer>
+        <Button title="Confirmar"/>
+      </Footer>
     </Container>
   );
 }
