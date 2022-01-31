@@ -18,6 +18,7 @@ Footer
 } from './styles';
 import ArrowSvg  from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
+import { Calendar } from '../../components/Calendar';
 
 
 
@@ -56,7 +57,9 @@ export function Scheduling() {
           </DateInfo>
         </RentalPeriod>
       </Header>
-      <Content></Content>
+      <Content>
+        <Calendar/>
+      </Content>
       <Footer>
         <Button title="Confirmar" />
       </Footer>
