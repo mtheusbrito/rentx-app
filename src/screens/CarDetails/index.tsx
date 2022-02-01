@@ -32,9 +32,22 @@ import {
   Footer
 } from './styles';
 import { Button } from '../../components/Button';
-import { useTheme } from 'styled-components';
+import { RootStackParamList } from '../../@types/navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
+ type SchedulingScreenNavigationProp = NativeStackNavigationProp<
+   RootStackParamList,
+   'Scheduling'
+ >;
 export function CarDetails() {
+
+  const { navigate } = useNavigation<SchedulingScreenNavigationProp>();
+
+
+  function handleConfirmRental() {
+    navigate('Scheduling', { option: '' });
+  }
   return (
     <Container>
       <Header>
@@ -76,7 +89,7 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar"/>
+        <Button title="Confirmar" onPress={handleConfirmRental} />
       </Footer>
     </Container>
   );

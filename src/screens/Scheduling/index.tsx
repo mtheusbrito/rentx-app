@@ -19,10 +19,22 @@ Footer
 import ArrowSvg  from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
 import { Calendar } from '../../components/Calendar';
+import { RootStackParamList } from '../../@types/navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 
-
+type SchedulingCompleteScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'SchedulingComplete'
+>;
 export function Scheduling() {
+  const { navigate } = useNavigation<SchedulingCompleteScreenNavigationProp>();
+
+
+  function handleConfirmRental(){
+    navigate('SchedulingComplete', { option: ''});
+  }
   const theme = useTheme();
   return (
     <Container>
@@ -58,10 +70,10 @@ export function Scheduling() {
         </RentalPeriod>
       </Header>
       <Content>
-        <Calendar/>
+        <Calendar />
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Alugar agora" onPress={handleConfirmRental} color={theme.colors.success} />
       </Footer>
     </Container>
   );
