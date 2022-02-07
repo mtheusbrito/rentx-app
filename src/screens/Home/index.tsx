@@ -25,8 +25,8 @@ export function Home() {
   const [loading, setLoading] = useState<boolean>(true);
 
   
-  function handleDetails() {
-   navigate('CarDetails', {option: ''});
+  function handleDetails(car: CarDTO) {
+   navigate('CarDetails', {option: '', car});
   }
 
 useEffect(()=>{
@@ -67,7 +67,7 @@ useEffect(()=>{
         <CarList
           data={cars}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Car data={item} onPress={handleDetails} />}
+          renderItem={({ item }) => <Car data={item} onPress={()=>handleDetails(item)} />}
         ></CarList>
       )}
     </Container>

@@ -3,16 +3,6 @@ import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
-import speedSvg  from '../../assets/speed.svg';
-import accelerationSvg from '../../assets/acceleration.svg';
-
-import forceSvg  from'../../assets/force.svg';
-
-import gasolineSvg  from '../../assets/gasoline.svg';
-
-import exchangeSvg   from'../../assets/exchange.svg';
-
-import  peopleSvg  from '../../assets/people.svg';
 
 
 import {
@@ -34,62 +24,73 @@ import {
 import { Button } from '../../components/Button';
 import { RootStackParamList } from '../../@types/navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
+import { getAccessoryIcon } from '../../utils/getAccessories';
 
  type SchedulingScreenNavigationProp = NativeStackNavigationProp<
    RootStackParamList,
    'Scheduling'
  >;
+ type Params = RouteProp<RootStackParamList, 'CarDetails'>;
 export function CarDetails() {
 
   const { navigate } = useNavigation<SchedulingScreenNavigationProp>();
+
+  const {params: { car },} = useRoute<Params>();
 
 
   function handleConfirmRental() {
     navigate('Scheduling', { option: '' });
   }
+  function handleBack(){
+    navigate('Home');
+  }
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </Header>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <CarImages>
         <ImageSlider
-          imagesUrl={[
-            'https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png',
-          ]}
+          imagesUrl={car.photos}
         ></ImageSlider>
       </CarImages>
 
       <Content>
         <Details>
           <Description>
-            <Brand>Lamborghini</Brand>
-            <Name>Huracan</Name>
+            <Brand>{car.brand}</Brand>
+            <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>Ao dia</Period>
-            <Price>R$ 1000 </Price>
+            <Period>{car.rent.period}</Period>
+            <Price>R$ {car.rent.price} </Price>
           </Rent>
         </Details>
         <Accessories>
-          <Accessory name="380km/h" icon={speedSvg} />
-          <Accessory name="3.2s" icon={accelerationSvg} />
-          <Accessory name="800 HP" icon={forceSvg} />
-          <Accessory name="Gasoline" icon={gasolineSvg} />
-          <Accessory name="Auto" icon={exchangeSvg} />
-          <Accessory name="2 peoples" icon={peopleSvg} />
+          {car.accessories.map((a)=>{
+            return <Accessory key={a.type} name={a.name} icon={getAccessoryIcon(a.type)} />;
+          })} 
+         
+         
         </Accessories>
 
         <About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praća Real Maestranza de Sevilla. É um belissimo carro
-          para quem fosta de acelerar.
+          {car.about}
         </About>
       </Content>
 
       <Footer>
-        <Button title="Escolher periodo do aluguel" onPress={handleConfirmRental} />
+        <Button
+          title="Escolher periodo do aluguel"
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );
