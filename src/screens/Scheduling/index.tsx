@@ -35,6 +35,10 @@ export function Scheduling() {
   function handleConfirmRental(){
     navigate('SchedulingComplete', { option: ''});
   }
+
+  function handleChangeDay(){
+    
+  }
   const theme = useTheme();
   return (
     <Container>
@@ -70,7 +74,7 @@ export function Scheduling() {
         </RentalPeriod>
       </Header>
       <Content>
-        <Calendar />
+        <Calendar markedDates={} onDayPress={handleChangeDay} />
       </Content>
       <Footer>
         <Button title="Alugar agora" onPress={handleConfirmRental} color={theme.colors.success} />
